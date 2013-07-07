@@ -44,6 +44,7 @@
                 			<%}%>
                 			<li id="menu-about"><a href="javascript:void(0)">About</a></li>
                 			<li id="menu-apply"><a href="./UpdateInfo.jsp">Update Information</a></li>
+							<li id="menu-show"><a href="javascript:void(0)">Show Profile</a></li>
                 			<li id="menu-events"><a href="javascript:void(0)">Events &amp; Updates</a></li>
                 			<li id="menu-connect"><a href="javascript:void(0)">Contact </a></li>
             			</ul>

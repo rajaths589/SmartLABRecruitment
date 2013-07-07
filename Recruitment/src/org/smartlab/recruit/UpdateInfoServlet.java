@@ -1,10 +1,16 @@
 package org.smartlab.recruit;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
+
+
 
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
@@ -31,6 +37,20 @@ public class UpdateInfoServlet extends HttpServlet {
 			Key key = KeyFactory.createKey("email", user.getEmail());
 			Query query = new Query("userInfo", key);
 			Entity entity = null;
+			Map<String,String> bhavanlist = new HashMap<String,String>();
+			bhavanlist.put("1", "RAM");
+			bhavanlist.put("2", "BUDH");
+			bhavanlist.put("3", "KRISHNA");
+			bhavanlist.put("4", "GANDHI");
+			bhavanlist.put("5", "SHANKAR");
+			bhavanlist.put("6", "VYAS");
+			bhavanlist.put("7", "VISHWAKARMA");
+			bhavanlist.put("8", "BHAGIRATH");
+			bhavanlist.put("9", "ASHOK");
+			bhavanlist.put("10", "RANAPRATAP");
+			bhavanlist.put("11", "MALAVIYA");
+			bhavanlist.put("12", "MEERA");
+
 			try{
 				entity = datastore.prepare(query).asSingleEntity();
 			}
@@ -41,18 +61,28 @@ public class UpdateInfoServlet extends HttpServlet {
 			}
 			if(entity!=null)
 			{
-				entity.setProperty("name", req.getParameter("name"));						
-				entity.setProperty("id", req.getParameter("id"));
-				entity.setProperty("addr", req.getParameter("addr"));
+				entity.setProperty("first-name", req.getParameter("name"));
+				entity.setProperty("last-name", req.getParameter("last-name"));
+				entity.setProperty("email", req.getParameter("email"));
+				entity.setProperty("room",req.getParameter("room"));
+				String bid = req.getParameter("bhavan");
+				entity.setProperty("bhavan", bhavanlist.get(bid));
+				
+				entity.setProperty("id", req.getParameter("id"));				
 				entity.setProperty("phone", req.getParameter("phone"));
 				datastore.put(entity);
 			}
 			else
 			{
 				entity = new Entity("userInfo",key);				
-				entity.setProperty("name", req.getParameter("name"));						
-				entity.setProperty("id", req.getParameter("id"));
-				entity.setProperty("addr", req.getParameter("addr"));
+				entity.setProperty("first-name", req.getParameter("name"));
+				entity.setProperty("last-name", req.getParameter("last-name"));
+				entity.setProperty("email", req.getParameter("email"));
+				entity.setProperty("room",req.getParameter("room"));
+				String bid = req.getParameter("bhavan");
+				entity.setProperty("bhavan", bhavanlist.get(bid));
+				
+				entity.setProperty("id", req.getParameter("id"));				
 				entity.setProperty("phone", req.getParameter("phone"));
 				datastore.put(entity);
 			}						
